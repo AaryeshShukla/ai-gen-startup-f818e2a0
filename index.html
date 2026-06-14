@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow AI - SaaS Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-bg: #05070c;
+            --neon-purple: #8b5cf6;
+            --vibrant-cyan: #06b6d4;
+            --dark-indigo: #1e1e2f;
+            --text-color: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --border-radius: 12px;
+        }
+        body {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+        nav a {
+            color: var(--text-color);
+            margin: 0 15px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: var(--neon-purple);
+        }
+        .cta {
+            background: var(--neon-purple);
+            color: var(--text-color);
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .cta:hover {
+            background: var(--vibrant-cyan);
+        }
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            margin: 10px 0;
+        }
+        .email-form {
+            display: flex;
+            margin-top: 20px;
+        }
+        .email-form input {
+            padding: 10px;
+            border: none;
+            border-radius: var(--border-radius);
+            margin-right: 10px;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 50px 20px;
+        }
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .feature-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--neon-purple);
+        }
+        .pricing {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 50px 0;
+        }
+        .toggle {
+            margin: 0 20px;
+            cursor: pointer;
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--border-radius);
+            background: var(--dark-indigo);
+            color: var(--text-color);
+            transition: background 0.3s;
+        }
+        .toggle:hover {
+            background: var(--neon-purple);
+        }
+        .faq {
+            padding: 50px 20px;
+        }
+        .faq-item {
+            margin: 10px 0;
+            cursor: pointer;
+            padding: 15px;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            transition: background 0.3s;
+        }
+        .faq-item:hover {
+            background: var(--neon-purple);
+        }
+        .footer {
+            padding: 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">TaskFlow AI</div>
+        <nav>
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+        <button class="cta">Get Started</button>
+    </header>
+    <section class="hero">
+        <h1>Transform Your Workflow with AI</h1>
+        <p>Join our waitlist for exclusive early access!</p>
+        <div class="email-form">
+            <input type="email" id="email" placeholder="Enter your email" required />
+            <button id="subscribe">Subscribe</button>
+        </div>
+    </section>
+    <section id="features" class="features">
+        <div class="feature-card">AI Automations</div>
+        <div class="feature-card">Real-time Sync</div>
+        <div class="feature-card">Smart Insights</div>
+    </section>
+    <section id="pricing" class="pricing">
+        <button class="toggle" id="monthly">Monthly</button>
+        <button class="toggle" id="annual">Annual</button>
+        <div id="price">$19/mo</div>
+    </section>
+    <section id="faq" class="faq">
+        <div class="faq-item" onclick="toggleFAQ(this)">What is TaskFlow AI?</div>
+        <div class="faq-item" onclick="toggleFAQ(this)">How does it work?</div>
+        <div class="faq-item" onclick="toggleFAQ(this)">What are the pricing plans?</div>
+    </section>
+    <footer class="footer">
+        <p>&copy; 2023 TaskFlow AI. All rights reserved.</p>
+    </footer>
+    <script>
+        document.getElementById('subscribe').addEventListener('click', function() {
+            const emailInput = document.getElementById('email');
+            const email = emailInput.value;
+            if (validateEmail(email)) {
+                alert('Thank you for subscribing!');
+                emailInput.value = '';
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        });
+
+        function validateEmail(email) {
+            const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return re.test(String(email).toLowerCase());
+        }
+
+        document.getElementById('monthly').addEventListener('click', function() {
+            document.getElementById('price').innerText = '$19/mo';
+        });
+
+        document.getElementById('annual').addEventListener('click', function() {
+            document.getElementById('price').innerText = '$15/mo';
+        });
+
+        function toggleFAQ(element) {
+            const nextElement = element.nextElementSibling;
+            if (nextElement) {
+                nextElement.classList.toggle('active');
+                nextElement.style.display = nextElement.style.display === 'block' ? 'none' : 'block';
+            }
+        }
+    </script>
+</body>
+</html>
